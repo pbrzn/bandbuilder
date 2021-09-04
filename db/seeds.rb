@@ -49,4 +49,8 @@ Musican.create(name: "Yo Yo Ma", email: "example_fifteen@mail.com", password: "W
 Musican.create(name: "Niccolo Paganinni", email: "example_fifteen@mail.com", password: "wurdswurdsW@RD5", instrument_id: 11, pay_rate: 250.25)
 Musican.create(name: "Django Reinhart", email: "example_fifteen@mail.com", password: "W@RD5W@RD5W@RD5", instrument_id: 1, pay_rate: 250.25)
 
-Gig.create(music_director_id: 1, genre_id: 1, title: "Jazz Combo @ The Village Underground", location: "The Village Underground – New York, NY", start_date: )
+Gig.create(music_director_id: 1, genre_id: 3, title: "Jazz Combo @ The Village Underground", location: "The Village Underground – New York, NY", start_date: "2022_09_04_170000", end_date: "2022_09_04_180000")
+Gig.create(music_director_id: 2, genre_id: 4, title: "Beethoven's 5th Symphony", location: "The Metropolitan Opera House – New York, NY", start_date: "2022_09_15_190000", end_date: "2022_09_15_200000")
+Gig.create(music_director_id: 3, genre_id: 1, title: "The New Jimi Hendrix Experience", location: "Cafe Wha? – New York, NY", start_date: "2022_09_05_190000", end_date: "2022_09_05_200000")
+Gig.create(music_director_id: 4, genre_id: 2, title: "Best Show Ever @ Rockwood", location: "Rockwood Music Hall – New York, NY", start_date: "2022_10_31_190000", end_date: "2022_10_31_200000")
+Gig.create(music_director_id: 5, genre_id: 5, title: "The Big U.S. Tour", start_date: "2022_01_31", end_date: "2022_10_31")
