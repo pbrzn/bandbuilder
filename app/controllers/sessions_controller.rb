@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         redirect_to musician_path(@user)
       end
     else
-      @errors = @user.errors.any?
+      # @errors = @user.errors.any?
       redirect_to login_path
     end
   end

@@ -44,12 +44,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :type, :password)
   end
-
-  def logged_in?
-    true if session[:user_id]
-  end
-
-  def current_user
-    session[:user_id]
-  end
 end
