@@ -1,0 +1,9 @@
+<h1><%= @genre.name %></h1>
+
+<div class="link_list">
+  <ul>
+    <% @genre.gigs.each do |gig| %>
+      <li><%= link_to gig.title, gig_path(gig) %></li>
+    <% end %>
+  </ul>
+</div>

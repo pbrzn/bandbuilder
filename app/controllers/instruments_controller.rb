@@ -3,9 +3,9 @@ class InstrumentsController < ApplicationController
     @instruments = Instrument.all
   end
 
-  def new
-    @instrument = Instrument.new
-  end
+  # def new
+  #   @instrument = Instrument.new
+  # end
 
   def create
     @instrument = Instrument.create!(instrument_params)

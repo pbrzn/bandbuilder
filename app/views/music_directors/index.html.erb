@@ -1,0 +1,9 @@
+<h1>All Music Directors</h1>
+
+<h3>Look up all gigs by each music director:</h3>
+
+<ul>
+  <% @music_directors.each do |director| %>
+    <li><strong><%= link_to director.name, music_director_path(director) %></strong></li>
+  <% end %>
+</ul>

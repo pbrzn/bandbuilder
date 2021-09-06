@@ -1,0 +1,9 @@
+<h1>All Genres</h1>
+
+<h3>Look up all gigs by genre:</h3>
+
+<ul>
+  <% @genres.each do |genre| %>
+    <li><strong><%= link_to genre.name, genre_path(genre) %></strong></li>
+  <% end %>
+</ul>

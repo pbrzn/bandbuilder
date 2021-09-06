@@ -1,6 +1,7 @@
 class MusiciansController < ApplicationController
   def index
     @musicians = Musician.all
+    @instruments = Instrument.all
   end
 
   def show

@@ -4,18 +4,22 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :edit, :update, :destroy]
 
   get '/login', to: 'sessions#new'
-  resources :sessions, only: [:create, :destroy]
+  delete '/logout', to: 'sessions#destroy'
+  resources :sessions, only: :create
 
   resources :music_directors, only: [:index, :show] do
     resources :gigs
   end
 
-  resources :musicians, only: [:index, :show]
+  resources :musicians, only: [:index, :show] do
+    resources :gigs, only: [:index, :show]
 
-  resources :gigs, only: [:index, :show]
+  end
 
-  resources :instruments, only: [:index, :new, :create, :show]
+  resources :gigs
 
-  resources :genres, only: [:index, :new, :create, :show]
+  resources :instruments, only: [:index, :create, :show]
+
+  resources :genres, only: [:index, :show]
 
 end

@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+   font-family: 'Futura';
+   text-shadow: 1px 1px #B5BDC7;
+ }
+
+ .error_explanation {
+   color: 'red';
+   font-style: italic;
+ }

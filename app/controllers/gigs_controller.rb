@@ -1,6 +1,12 @@
 class GigsController < ApplicationController
   def index
-    @gigs = Gig.all
+    if params[:music_director_id]
+      @gigs = MusicDirector.find(params[:music_director_id]).gigs
+    elsif params[:musician_id]
+      @gigs = Musician.find(params[:musician_id]).gigs
+    else
+      @gigs = Gig.all
+    end
   end
 
   def new
@@ -45,7 +51,7 @@ class GigsController < ApplicationController
   private
 
   def gig_params
-    params.require(:gig).permit(:title, :description, :location, :start_date, :end_date, :music_director_id, :genre_id, :budget, instrument_ids: [])
+    params.require(:gig).permit(:title, :description, :location, :start_date, :end_date, :music_director_id, :genre_id, :budget, instrument_ids: [], :instrument_attributes)
   end
 
 end

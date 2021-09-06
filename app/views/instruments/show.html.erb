@@ -1,0 +1,9 @@
+<h1><%= @instrument.name %></h1>
+
+<div class="link_list">
+  <ul>
+    <% @instrument.musicians.each do |musician| %>
+      <li><%= link_to musician.name, musician_path(musician) %></li>
+    <% end %>
+  </ul>
+</div>
