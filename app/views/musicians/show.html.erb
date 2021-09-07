@@ -1,0 +1,21 @@
+<%= flash[:message] %>
+
+<h1><%= @musician.name %> – <%= @musician.instrument_name %></h1>
+
+<div class="bios_and_descriptions">
+<%= @musician.bio unless @musician.bio.nil? %>
+</div>
+
+<h2>Here Are All of <%= @musician.name %>'s Upcoming Gigs</h2>
+
+<div class="link_list">
+  <ul>
+    <% @musician.gigs.each do |gig| %>
+      <li><%= link_to gig.title, musician_gig_path(gig) %></li>
+    <% end %>
+  </ul>
+</div>
+
+<% if logged_in? && @musician == current_user %>
+  <%= button_to "Edit Profile", edit_user_path(@musician), method: 'get' %><br>
+<% end %>

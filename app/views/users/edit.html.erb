@@ -1,0 +1,8 @@
+<%= form_tag "/users/#{@user.id}", method: 'patch' %>
+  <%= hidden_field_tag :password, @user.password %>
+  <%= render partial: 'form' %>
+  <br>
+  <% if @user.type == "Musician" %>
+    <%= render partial: 'musician_form' %>
+  <% end %>
+  <%= submit_tag "Edit User" %>

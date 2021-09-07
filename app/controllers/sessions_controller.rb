@@ -1,5 +1,12 @@
 class SessionsController < ApplicationController
   def new
+    if logged_in? && current_user.type == "MusicDirector"
+      flash[:message] = "You are already logged in!"
+      redirect_to music_director_path(current_user)
+    elsif logged_in? && current_user.type == "Musician"
+      flash[:message] = "You are already logged in!"
+      redirect_to musician_path(current_user)
+    end
   end
 
   def create
@@ -12,12 +19,12 @@ class SessionsController < ApplicationController
         redirect_to musician_path(@user)
       end
     else
-      # @errors = @user.errors.any?
       redirect_to login_path
     end
   end
 
   def destroy
-    session[:user_id].clear
+    session.clear
+    redirect_to root_path
   end
 end

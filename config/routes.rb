@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
+  get '/', to: 'users#index', as: 'root'
+
   get '/signup', to: 'users#new'
   resources :users, only: [:create, :edit, :update, :destroy]
 
   get '/login', to: 'sessions#new'
-  delete '/logout', to: 'sessions#destroy'
-  resources :sessions, only: :create
+  post '/login', to: 'sessions#create'
+  post '/logout', to: 'sessions#destroy'
 
   resources :music_directors, only: [:index, :show] do
     resources :gigs

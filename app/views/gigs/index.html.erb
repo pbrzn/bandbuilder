@@ -1,0 +1,47 @@
+<% if params[:music_director_id] %>
+  <h1>All of <%= MusicDirector.find(params[:music_director_id]).name %>'s Gigs'</h1>
+<% elsif params[:musicians_id] %>
+  <h1>All of <%= Musician.find(params[:musician_id]).name %>'s Gigs</h1>
+<% else %>
+  <h1>All Gigs</h1>
+<% end %>
+
+<% if @gigs.upcoming_gigs.any? %>
+  <h3>Upcoming Gigs</h3>
+
+  <div class="link_list">
+    <ul>
+      <% @gigs.upcoming_gigs.each do |gig| %>
+        <li><%= link_to gig.title, gig_path(gig) %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @gigs.in_progress.any? %>
+  <h3>Gigs Currently In Progress</h3>
+
+  <div class="link_list">
+    <ul>
+      <% @gigs.in_progress.each do |gig| %>
+        <li><%= link_to gig.title, gig_path(gig) %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @gigs.already_played.any? %>
+  <h3>Past Gigs</h3>
+
+  <div class="link_list">
+    <ul>
+      <% @gigs.already_played.each do |gig| %>
+        <li><%= link_to gig.title, gig_path(gig) %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if current_user.type == "MusicDirector" %>
+  <%= button_to "Create New Gig", new_music_direcor_gig_path %>
+<% end %>

@@ -16,10 +16,11 @@
 
  body {
    font-family: 'Futura';
+   font-variant-caps: small-caps;
    text-shadow: 1px 1px #B5BDC7;
  }
 
- .error_explanation {
-   color: 'red';
+ body div.error_explanation {
+   color: red;
    font-style: italic;
  }

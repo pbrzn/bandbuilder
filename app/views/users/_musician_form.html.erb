@@ -1,0 +1,6 @@
+<%= label_tag :instrument %>
+<%= select_tag "user[instrument_id]", options_from_collection_for_select(Instrument.all, :id, :name), :include_blank => true %>
+<br>
+<%= label_tag "Pay Rate $" %>
+<%= number_field_tag "user[pay_rate]" %>
+<br>

@@ -1,0 +1,16 @@
+<h1>Sign Up for Bandbuilder</h1>
+
+<%= form_tag "/users" %>
+<%= render partial: 'form' %>
+<br>
+<%= label_tag :password %>
+<%= password_field_tag "user[password]" %>
+<br>
+<%= label_tag :type %>
+<%= select_tag "user[type]", options_for_select(%w[MusicDirector Musician]) %>
+<br>
+
+<p>NOTE: Only fill in the following fields if you have selected "Musician" as your type...</p>
+
+<%= render partial: 'musician_form' %>
+<%= submit_tag "Create User" %>

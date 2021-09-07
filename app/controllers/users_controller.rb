@@ -1,14 +1,16 @@
 class UsersController < ApplicationController
-  helper_method :logged_in?
-  helper_method :current_user
 
   def index
-    @music_directors = MusicDirector.all
-    @musicians = Musician.all
   end
 
   def new
-    @user = User.new
+    if logged_in? && current_user.type == "MusicDirector"
+      flash[:message] = "You are already signed up!"
+      redirect_to music_director_path(current_user)
+    elsif logged_in? && current_user.type == "Musician"
+      flash[:message] = "You are already signed up!"
+      redirect_to musician_path(current_user)
+    end
   end
 
   def create
@@ -16,8 +18,10 @@ class UsersController < ApplicationController
     if @user.errors.any?
       redirect_to new_user_path
     elsif @user.type == "MusicDirector"
+      "Welcome #{@user.name}!"
       redirect_to music_director_path(@user)
     elsif @user.type == "Musician"
+      "Welcome #{@user.name}!"
       redirect_to musician_path(@user)
     end
   end
@@ -29,7 +33,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by(id: params[:id])
     if logged_in? && @user == current_user
-    @user.update!(user_params)
+      @user.update!(user_params)
+    end
     if @user.errors.any?
       redirect_to edit_user_path
     elsif @user.type == "MusicDirector"
@@ -42,6 +47,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :type, :password)
+    params.require(:user).permit(:name, :email, :type, :password, :type, :instrument_id, :pay_rate)
   end
 end

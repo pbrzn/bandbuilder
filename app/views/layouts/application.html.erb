@@ -13,4 +13,10 @@
   <body>
     <%= yield %>
   </body>
+
+  <footer>
+    <% if logged_in? %>
+      <%= button_to "Log Out", logout_path, method: 'post' %>
+    <% end %>
+  </footer>
 </html>
