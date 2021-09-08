@@ -5,7 +5,6 @@ class Gig < ApplicationRecord
   has_many :instruments, through: :gig_instruments
   has_many :gig_musicians
   has_many :musicians, through: :gig_musicians
-  # accepts_nested_attributes_for :instruments
 
   def instruments_attributes=(instrument_attributes)
     instrument_attributes.values.each do |instrument_attribute|
@@ -52,8 +51,6 @@ class Gig < ApplicationRecord
   end
 
   def self.in_progress
-    # gigs = self.all.select {|gig| gig.start_date <= Date.today && gig.end_date >= Date.today }
-    # gigs.order("start_date DESC")
     where(["start_date <= ? AND end_date >= ?", Date.today, Date.today]).order("start_date DESC")
   end
 end

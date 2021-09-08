@@ -1,5 +1,5 @@
 <%= form_for gig do |f| %>
-  <%= f.hidden_field :music_director_id, current_user.id %>
+  <%= f.hidden_field :music_director_id, :value => params[:music_director_id] %>
 
   <%= f.label :title %>
   <%= f.text_field :title %>
@@ -13,16 +13,19 @@
   <%= f.label :end_date %>
   <%= f.datetime_field :end_date %>
   <br>
-  <%= f.label "Add Instruments" %>
+  <%= f.label "Budget $" %>
+  <%= f.number_field :budget %>
+  <br>
+  <%= f.label "Add Instruments:" %>
   <%= f.collection_check_boxes :instrument_ids, Instrument.all, :id, :name %>
   <br>
   <%= f.fields_for :instruments, gig.instruments.build do |instruments_fields| %>
     <%= instruments_fields.label "New Instrument Name" %>
-    <%= instruments_fields.text_area :name %>
+    <%= instruments_fields.text_field :name %>
   <% end %>
   <br>
   <%= f.label :genre %>
-  <%= f.collection_select :genre_ids, Genre.all, :id, :name %>
+  <%= f.collection_select :genre_id, Genre.all, :id, :name %>
   <br>
   <%= f.submit %>
 <% end %>

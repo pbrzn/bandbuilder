@@ -8,4 +8,8 @@ class Musician < User
   def instrument_name
     self.instrument.name
   end
+
+  def self.musicians_by_instrument(instrument)
+    self.all.select {|musician| musician.instrument == instrument }
+  end
 end

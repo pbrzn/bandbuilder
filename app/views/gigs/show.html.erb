@@ -2,9 +2,11 @@
 
 <p class="bios_and_descriptions"><%= @gig.description unless @gig.description.nil? %></p>
 
-<h3>Music Director: <%= @gig.music_director.name %></h3>
+<h3>Music Director: <%= link_to @gig.music_director.name, music_director_path(@gig.music_director) %></h3>
 
-<% if @gig.musicians %>
+<% if @gig.musicians.any? %>
+  <h4>Musicians Booked</h4>
+
   <div class="link_list">
     <ul>
       <% @gig.musicians.each do |musician| %>
@@ -15,6 +17,8 @@
 <% end %>
 
 <% if @gig.open_instrument_slots %>
+  <h4>Open Instrument Slots</h4>
+
   <div class="link_list">
     <ul>
       <% @gig.open_instrument_slots.each do |instrument| %>
@@ -25,5 +29,6 @@
 <% end %>
 
 <% if @gig.music_director == current_user %>
-  <%= button_to "Edit Gig", edit_music_director_gig_path(@gig) %>
+  <p>Budget: $<%= @gig.budget %>
+  <%= button_to "Edit Gig/Add Musicians", edit_music_director_gig_path(@gig.music_director, @gig), method: 'get' %><br>
 <% end %>

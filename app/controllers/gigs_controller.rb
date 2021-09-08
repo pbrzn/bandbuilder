@@ -19,7 +19,7 @@ class GigsController < ApplicationController
       # @errors = @gig.errors
       redirect_to new_music_director_gig_path
     else
-      redirect_to music_director_gig_path(@gig)
+      redirect_to music_director_gig_path(@gig.music_director.id, @gig.id)
     end
   end
 
@@ -35,23 +35,23 @@ class GigsController < ApplicationController
     @gig = Gig.find_by(id: params[:id])
     @gig.update!(gig_params)
     if @gig.errors.any?
-      # @errors = @gig.errors
-      redirect_to edit_music_director_gig_path(@gig)
+      redirect_to edit_music_director_gig_path(@gig.music_director.id, @gig)
     else
-      redirect_to music_director_gig_path(@gig)
+      redirect_to music_director_gig_path(@gig.music_director.id, @gig)
     end
   end
 
   def destroy
     @gig = Gig.find_by(id: params[:id])
+    @music_director = @gig.music_director
     @gig.destroy
-    redirect_to login_path
+    redirect_to music_director_path(@music_director)
   end
 
   private
 
   def gig_params
-    params.require(:gig).permit(:title, :description, :location, :start_date, :end_date, :music_director_id, :genre_id, :budget, :instruments_attributes, instrument_ids: [])
+    params.require(:gig).permit(:title, :description, :location, :start_date, :end_date, :music_director_id, :genre_id, :budget, :instruments_attributes, instrument_ids: [], musician_ids: [])
   end
 
 end

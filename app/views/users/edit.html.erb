@@ -3,6 +3,6 @@
   <%= render partial: 'form' %>
   <br>
   <% if @user.type == "Musician" %>
-    <%= render partial: 'musician_form' %>
+    <%= render partial: 'musicians_only' %>
   <% end %>
   <%= submit_tag "Edit User" %>

@@ -1,0 +1,7 @@
+<% if gig.music_director == current_user %>
+  <%= link_to gig.title, music_director_gig_path(current_user, gig) %> <%= button_to "Delete Gig", music_director_gig_path(current_user, gig), method: 'delete' %>
+<% elsif gig.musicians.include?(current_user) %>
+  <%= link_to gig.title, musician_gig_path(current_user, gig) %>
+<% else %>
+  <%= link_to gig.title, gig_path(gig) %>
+<% end %>

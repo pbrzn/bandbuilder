@@ -15,8 +15,10 @@
   </body>
 
   <footer>
-    <% if logged_in? %>
-      <%= button_to "Log Out", logout_path, method: 'post' %>
-    <% end %>
+    <div id="logout">
+      <% if logged_in? %>
+        <%= button_to "Log Out", logout_path, method: 'post' %>
+      <% end %>
+    </div>
   </footer>
 </html>
