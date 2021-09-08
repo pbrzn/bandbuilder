@@ -8,7 +8,7 @@
 
 <h2><%= link_to "#{@musician.name}'s Upcoming Gigs", musician_gigs_path(@musician) %></h2>
 
-<h3><%= link_to "All Gigs", gigs_path %></h3>
+<%= render 'users/links' %><br>
 
 <% if logged_in? && @musician == current_user %>
   <%= button_to "Edit Profile", edit_user_path(@musician), method: 'get' %><br>
