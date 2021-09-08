@@ -33,6 +33,16 @@ class GigsController < ApplicationController
 
   def update
     @gig = Gig.find_by(id: params[:id])
+    # if gig_params[:musician_ids]
+    #   params[:gig][:musician_ids].each do |id|
+    #     params[:gig][:musician_ids].delete_if{|i| i == ""}
+    #     musician = Musician.find(id)
+    #     if @gig.open_instrument_slots.include?(musician.instrument)
+    #       @gig.book_musician(musician)
+    #     end
+    #     gig_params[:musician_ids].delete_if{|i| i == id}
+    #   end
+    # end
     @gig.update!(gig_params)
     if @gig.errors.any?
       redirect_to edit_music_director_gig_path(@gig.music_director.id, @gig)

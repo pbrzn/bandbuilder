@@ -48,6 +48,6 @@
   </div>
 <% end %>
 
-<% if current_user.type == "MusicDirector" && current_user.id == MusicDirector.find(params[:music_director_id])%>
+<% if current_user.type == "MusicDirector" %>
   <%= button_to "Create New Gig", new_music_director_gig_path(current_user), method: 'get' %>
 <% end %>

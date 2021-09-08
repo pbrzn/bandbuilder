@@ -5,6 +5,12 @@ class Gig < ApplicationRecord
   has_many :instruments, through: :gig_instruments
   has_many :gig_musicians
   has_many :musicians, through: :gig_musicians
+  # accepts_nested_attributes_for :instruments
+
+  scope :upcoming_gigs, -> { where("start_date > ?", Date.today).order("start_date DESC") }
+  scope :already_played, -> { where("end_date < ?", Date.today).order("start_date DESC") }
+  scope :in_progress, -> { where(["start_date <= ? AND end_date >= ?", Date.today, Date.today]).order("start_date DESC") }
+
 
   def instruments_attributes=(instrument_attributes)
     instrument_attributes.values.each do |instrument_attribute|
@@ -40,17 +46,5 @@ class Gig < ApplicationRecord
       self.update!(budget: (self.budget -= musician.pay_rate))
       "#{musician.name} has been added to #{self.title}!"
     end
-  end
-
-  def self.upcoming_gigs
-    where("start_date > ?", Date.today).order("start_date DESC")
-  end
-
-  def self.already_played
-    where("end_date < ?", Date.today).order("start_date DESC")
-  end
-
-  def self.in_progress
-    where(["start_date <= ? AND end_date >= ?", Date.today, Date.today]).order("start_date DESC")
   end
 end

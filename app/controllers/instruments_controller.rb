@@ -4,12 +4,9 @@ class InstrumentsController < ApplicationController
   end
 
   def create
+    m_d = params[:music_director_id]
+    gig = params[:id]
     @instrument = Instrument.create!(instrument_params)
-    if @instrument.errors.any?
-      redirect_to new_instrument_path
-    else
-      redirecto_to instrument_path(@instrument)
-    end
   end
 
   def show

@@ -12,7 +12,6 @@
 
 <h3><%= link_to "All Gigs", gigs_path %></h3>
 
-
 <% if logged_in? && @music_director == current_user %>
-  <%= button_to "Edit Profile", edit_user_path(@music_director) %><br>
+  <%= button_to "Edit Profile", edit_user_path(@music_director), method: 'get' %><br>
 <% end %>

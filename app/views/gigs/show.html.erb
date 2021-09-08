@@ -16,7 +16,7 @@
   </div>
 <% end %>
 
-<% if @gig.open_instrument_slots %>
+<% if @gig.open_instrument_slots.any? %>
   <h4>Open Instrument Slots</h4>
 
   <div class="link_list">

@@ -1,16 +1,2 @@
 <h3>Edit <%= @gig.title %></h3>
 <%= render partial: 'form', locals: {gig: @gig}, submit_text: "Update Gig" %>
-
-<% if @gig.open_instrument_slots.any? %>
-
-  <h3>Add Musicians To <%= @gig.title %></h3>
-
-  <%= form_for @gig do |f| %>
-    <% @gig.open_instrument_slots.each do |instrument| %>
-      <%= f.label "Add #{instrument.name} Player" %>
-      <%= f.collection_check_boxes :musician_ids, instrument.musicians, :id, :name %><br>
-    <% end %>
-    <%= f.submit "Add Musicians" %>
-  <% end %>
-
-<% end %>
