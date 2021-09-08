@@ -61,7 +61,7 @@ class GigsController < ApplicationController
   private
 
   def gig_params
-    params.require(:gig).permit(:title, :description, :location, :start_date, :end_date, :music_director_id, :genre_id, :budget, :instruments_attributes, instrument_ids: [], musician_ids: [])
+    params.require(:gig).permit(:title, :description, :location, :start_date, :end_date, :music_director_id, :genre_id, :budget, instruments_attributes: [:name], instrument_ids: [], musician_ids: [])
   end
 
 end
