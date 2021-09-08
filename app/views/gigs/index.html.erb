@@ -13,7 +13,7 @@
     <ul>
       <% @gigs.upcoming_gigs.each do |gig| %>
         <li>
-          <%= render 'links' %>
+          <%= render partial: 'links', locals: {gig: gig}%>
           </li>
       <% end %>
     </ul>
@@ -27,7 +27,7 @@
     <ul>
       <% @gigs.in_progress.each do |gig| %>
         <li>
-          <%= render 'links' %>
+          <%= render partial: 'links', locals: {gig: gig}%>
         </li>
       <% end %>
     </ul>
@@ -41,13 +41,13 @@
     <ul>
       <% @gigs.already_played.each do |gig| %>
         <li>
-          <%= render 'links' %>
+          <%= render partial: 'links', locals: {gig: gig}%>
         </li>
       <% end %>
     </ul>
   </div>
 <% end %>
 
-<% if current_user.type == "MusicDirector" && current_user.id %>
+<% if current_user.type == "MusicDirector" && current_user.id == MusicDirector.find(params[:music_director_id])%>
   <%= button_to "Create New Gig", new_music_director_gig_path(current_user), method: 'get' %>
 <% end %>

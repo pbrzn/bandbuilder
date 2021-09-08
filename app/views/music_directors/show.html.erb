@@ -10,6 +10,9 @@
 
 <h2><%= link_to "#{@music_director.name}'s Upcoming Gigs", music_director_gigs_path(@music_director) %></h2>
 
+<h3><%= link_to "All Gigs", gigs_path %></h3>
+
+
 <% if logged_in? && @music_director == current_user %>
   <%= button_to "Edit Profile", edit_user_path(@music_director) %><br>
 <% end %>
