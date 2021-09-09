@@ -16,7 +16,8 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.errors.any?
-      redirect_to new_user_path
+      @errors = @user.errors
+      render :new
     elsif @user.type == "MusicDirector"
       "Welcome #{@user.name}!"
       redirect_to music_director_path(@user)

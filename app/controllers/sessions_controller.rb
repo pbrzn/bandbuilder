@@ -11,15 +11,19 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:email])
-    if @user.authenticate(params[:password])
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       if @user.type == "MusicDirector"
         redirect_to music_director_path(@user)
       elsif @user.type == "Musician"
         redirect_to musician_path(@user)
       end
+    elsif params[:email].empty? || params[:password].empty?
+      flash[:message] = "Both email and password fields cannot be empty. Please try again."
+      render :new
     else
-      redirect_to login_path
+      flash[:message] = "Email or password is incorrect. Please try again."
+      render :new
     end
   end
 

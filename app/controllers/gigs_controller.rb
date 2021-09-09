@@ -16,7 +16,6 @@ class GigsController < ApplicationController
   def create
     @gig = Gig.create(gig_params)
     if @gig.errors.any?
-      # @errors = @gig.errors
       redirect_to new_music_director_gig_path
     else
       redirect_to music_director_gig_path(@gig.music_director.id, @gig.id)

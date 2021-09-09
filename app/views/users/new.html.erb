@@ -1,5 +1,17 @@
 <%= flash[:message] %>
 
+<% if !@errors.nil? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@errors.count, "error") %> prohibited this user from being created:</h2>
+
+    <ul>
+      <% @errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h1>Sign Up for Bandbuilder</h1>
 
 <%= form_tag "/users" %>
