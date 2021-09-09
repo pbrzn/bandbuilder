@@ -6,7 +6,7 @@ class InstrumentsController < ApplicationController
   def create
     m_d = params[:music_director_id]
     gig = params[:id]
-    @instrument = Instrument.create!(instrument_params)
+    @instrument = Instrument.create(instrument_params)
   end
 
   def show

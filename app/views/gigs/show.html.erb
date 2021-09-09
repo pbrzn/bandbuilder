@@ -1,3 +1,7 @@
+<% if @gig.errors.any? %>
+  <%= render partial: 'errors', locals: {gig: @gig} %>
+<% end %>
+
 <h1><%= @gig.title %></h1>
 
 <p class="bios_and_descriptions"><%= @gig.description unless @gig.description.nil? %></p>

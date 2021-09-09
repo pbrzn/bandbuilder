@@ -14,7 +14,7 @@ class GigsController < ApplicationController
   end
 
   def create
-    @gig = Gig.create!(gig_params)
+    @gig = Gig.create(gig_params)
     if @gig.errors.any?
       # @errors = @gig.errors
       redirect_to new_music_director_gig_path
@@ -33,17 +33,17 @@ class GigsController < ApplicationController
 
   def update
     @gig = Gig.find_by(id: params[:id])
-    # if gig_params[:musician_ids]
-    #   params[:gig][:musician_ids].each do |id|
-    #     params[:gig][:musician_ids].delete_if{|i| i == ""}
-    #     musician = Musician.find(id)
-    #     if @gig.open_instrument_slots.include?(musician.instrument)
-    #       @gig.book_musician(musician)
-    #     end
-    #     gig_params[:musician_ids].delete_if{|i| i == id}
-    #   end
-    # end
-    @gig.update!(gig_params)
+    @gig.update(gig_params.except(:musician_ids))
+    if gig_params[:musician_ids]
+      musician_ids = gig_params[:musician_ids].reject! {|id| id == ""}
+      musician_ids.each do |id|
+        musician = Musician.find(id)
+        if @gig.open_instrument_slots.include?(musician.instrument)
+          @gig.book_musician(musician)
+        end
+      end
+      @gig.save
+    end
     if @gig.errors.any?
       redirect_to edit_music_director_gig_path(@gig.music_director.id, @gig)
     else

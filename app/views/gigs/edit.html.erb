@@ -1,2 +1,6 @@
+<% if @gig.errors.any? %>
+  <%= render partial: 'errors', locals: {gig: @gig} %>
+<% end %>
+
 <h3>Edit <%= @gig.title %></h3>
 <%= render partial: 'form', locals: {gig: @gig}, submit_text: "Update Gig" %>

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create!(user_params)
+    @user = User.create(user_params)
     if @user.errors.any?
       redirect_to new_user_path
     elsif @user.type == "MusicDirector"
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by(id: params[:id])
     if logged_in? && @user == current_user
-      @user.update!(user_params)
+      @user.update(user_params)
     end
     if @user.errors.any?
       redirect_to edit_user_path

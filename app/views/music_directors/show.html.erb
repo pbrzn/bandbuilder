@@ -2,6 +2,10 @@
   <%= flash[:message] %>
 </div>
 
+<% if @music_director.errors.any? %>
+  <%= render partial: 'users/errors', locals: {user: @music_director} %>
+<% end %>
+
 <h1><%= @music_director.name %></h1>
 
 <div class="bios_and_descriptions">

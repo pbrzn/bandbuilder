@@ -1,1 +1,5 @@
+<% if @gig.errors.any? %>
+  <%= render partial: 'errors', locals: {gig: @gig} %>
+<% end %>
+
 <%= render partial: 'form', locals: {gig: @gig}, submit_text: "Create Gig" %>

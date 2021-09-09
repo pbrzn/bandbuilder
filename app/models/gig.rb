@@ -14,6 +14,7 @@ class Gig < ApplicationRecord
 
   def instruments_attributes=(instrument_attributes)
     instrument_attributes.values.each do |instrument_attribute|
+      return if instrument_attribute[:name].blank?
       instrument = Instrument.find_or_create_by(instrument_attribute)
       self.instruments << instrument
     end
@@ -43,8 +44,8 @@ class Gig < ApplicationRecord
       errors.add(:instruments, "has already been staffed for this project.")
     else
       self.musicians << musician
-      self.update!(budget: (self.budget -= musician.pay_rate))
-      "#{musician.name} has been added to #{self.title}!"
+      self.update(budget: (self.budget -= musician.pay_rate))
+      flash[:message] = "#{musician.name} has been added to #{self.title}!"
     end
   end
 end
