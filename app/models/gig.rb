@@ -7,10 +7,12 @@ class Gig < ApplicationRecord
   has_many :musicians, through: :gig_musicians
   # accepts_nested_attributes_for :instruments
 
+  validates :title, :genre, :instruments, :start_date, :end_date, :budget, presence: true
+
   scope :upcoming_gigs, -> { where("start_date > ?", Date.today).order("start_date DESC") }
   scope :already_played, -> { where("end_date < ?", Date.today).order("start_date DESC") }
   scope :in_progress, -> { where(["start_date <= ? AND end_date >= ?", Date.today, Date.today]).order("start_date DESC") }
-
+  # scope :projects_by_instrument, (instrument) -> { where("name = ?"), instrument.name}
 
   def instruments_attributes=(instrument_attributes)
     instrument_attributes.values.each do |instrument_attribute|
@@ -45,7 +47,7 @@ class Gig < ApplicationRecord
     else
       self.musicians << musician
       self.update(budget: (self.budget -= musician.pay_rate))
-      flash[:message] = "#{musician.name} has been added to #{self.title}!"
+      "#{musician.name} has been added to #{self.title}!"
     end
   end
 end

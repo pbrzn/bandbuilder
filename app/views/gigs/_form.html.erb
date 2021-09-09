@@ -14,7 +14,7 @@
   <%= f.datetime_field :end_date %>
   <br>
   <%= f.label "Budget $" %>
-  <%= f.number_field :budget %>
+  <%= f.number_field :budget, step: :any %>
   <br>
   <%= f.label "Add Instruments:" %>
   <%= f.collection_check_boxes :instrument_ids, Instrument.all, :id, :name %>

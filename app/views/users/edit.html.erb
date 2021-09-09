@@ -1,5 +1,17 @@
 <h1>Editing <%= @user.name %>'s Profile</h1>
 
+<% if !@errors.nil? %>
+  <div class="error_explanation">
+    <h2><%= pluralize(@errors.count, "error") %> prohibited this user from being updated:</h2>
+
+    <ul>
+      <% @errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_tag "/users/#{@user.id}", method: 'patch' %>
   <%= hidden_field_tag :password, @user.password %>
   <%= render partial: 'form' %>

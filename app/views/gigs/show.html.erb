@@ -1,3 +1,7 @@
+<div class="success_message">
+  <%= flash[:message] %>
+</div>
+
 <% if @gig.errors.any? %>
   <%= render partial: 'errors', locals: {gig: @gig} %>
 <% end %>
@@ -7,6 +11,9 @@
 <p class="bios_and_descriptions"><%= @gig.description unless @gig.description.nil? %></p>
 
 <h3>Music Director: <%= link_to @gig.music_director.name, music_director_path(@gig.music_director) %></h3>
+
+<%# ADD DATES HERE %>
+<%# IF SHOW IS ON A SINGLE DATE, ONLY DISPLAY START DATE/TIME %>
 
 <% if @gig.musicians.any? %>
   <h4>Musicians Booked</h4>
@@ -34,5 +41,6 @@
 
 <% if @gig.music_director == current_user %>
   <p>Budget: $<%= @gig.budget %>
-  <%= button_to "Edit Gig/Add Musicians", edit_music_director_gig_path(@gig.music_director, @gig), method: 'get' %><br>
+  <%= button_to "Edit Gig/Add Musicians", edit_music_director_gig_path(current_user, @gig), method: 'get' %><br>
+  <%= button_to "Delete Gig", music_director_gig_path(current_user, @gig), method: 'delete' %>
 <% end %>

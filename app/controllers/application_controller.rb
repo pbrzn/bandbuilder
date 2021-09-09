@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def logged_in?
-    true if session[:user_id]
+    session[:user_id]
   end
 
   def current_user

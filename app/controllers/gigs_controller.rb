@@ -16,7 +16,7 @@ class GigsController < ApplicationController
   def create
     @gig = Gig.create(gig_params)
     if @gig.errors.any?
-      redirect_to new_music_director_gig_path
+      render :new
     else
       redirect_to music_director_gig_path(@gig.music_director.id, @gig.id)
     end
@@ -39,6 +39,7 @@ class GigsController < ApplicationController
         musician = Musician.find(id)
         if @gig.open_instrument_slots.include?(musician.instrument)
           @gig.book_musician(musician)
+          flash[:message] = "#{musician.name} has been added to #{@gig.title}!" unless @gig.errors.any?
         end
       end
       @gig.save

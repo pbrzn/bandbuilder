@@ -4,25 +4,28 @@ class UsersController < ApplicationController
   end
 
   def new
-    if logged_in? && current_user.type == "MusicDirector"
+    if logged_in?
       flash[:message] = "You are already signed up!"
-      redirect_to music_director_path(current_user)
-    elsif logged_in? && current_user.type == "Musician"
-      flash[:message] = "You are already signed up!"
-      redirect_to musician_path(current_user)
+      if current_user.type == "MusicDirector"
+        redirect_to music_director_path(current_user)
+      elsif current_user.type == "Musician"
+        redirect_to musician_path(current_user)
+      end
     end
   end
 
   def create
     @user = User.create(user_params)
+    session[:user_id] = @user.id
     if @user.errors.any?
       @errors = @user.errors
       render :new
     elsif @user.type == "MusicDirector"
-      "Welcome #{@user.name}!"
+
+      flash[:message] = "Welcome #{@user.name}!"
       redirect_to music_director_path(@user)
     elsif @user.type == "Musician"
-      "Welcome #{@user.name}!"
+      flash[:message] = "Welcome #{@user.name}!"
       redirect_to musician_path(@user)
     end
   end
@@ -37,7 +40,7 @@ class UsersController < ApplicationController
       @user.update(user_params)
     end
     if @user.errors.any?
-      redirect_to edit_user_path
+      render :edit
     elsif @user.type == "MusicDirector"
       redirect_to music_director_path(@user)
     elsif @user.type == "Musician"
@@ -48,6 +51,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :type, :password, :type, :instrument_id, :pay_rate)
+    params.require(:user).permit(:name, :email, :type, :password, :type, :instrument_id, :pay_rate, instruments_attributes: [:name])
   end
 end

@@ -1,10 +1,10 @@
 <% if gig.errors.any? %>
-  <div id="error_explanation">
+  <div class="error_explanation">
     <h2><%= pluralize(gig.errors.count, "error") %> prohibited this gig from being saved:</h2>
 
     <ul>
-      <% gig.errors.each do |error| %>
-        <li><%= error.full_message %></li>
+      <% gig.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
       <% end %>
     </ul>
   </div>
