@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   post '/logout', to: 'sessions#destroy'
 
+  # get '/auth/google-oauth2/callback', to: 'sessions#create'
+
   resources :music_directors, only: [:index, :show] do
     resources :gigs
   end

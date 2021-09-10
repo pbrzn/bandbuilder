@@ -11,6 +11,8 @@ class UsersController < ApplicationController
       elsif current_user.type == "Musician"
         redirect_to musician_path(current_user)
       end
+    else
+      @user = User.new
     end
   end
 
@@ -40,6 +42,7 @@ class UsersController < ApplicationController
       @user.update(user_params)
     end
     if @user.errors.any?
+      @errors = @user.errors
       render :edit
     elsif @user.type == "MusicDirector"
       redirect_to music_director_path(@user)
@@ -51,6 +54,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :type, :password, :type, :instrument_id, :pay_rate, instruments_attributes: [:name])
+    params.require(:user).permit(:name, :email, :bio, :type, :password, :instrument_id, :pay_rate, instruments_attributes: [:name])
   end
 end

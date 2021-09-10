@@ -12,11 +12,29 @@
   </div>
 <% end %>
 
-<%= form_tag "/users/#{@user.id}", method: 'patch' %>
-  <%= hidden_field_tag :password, @user.password %>
-  <%= render partial: 'form' %>
+<%# <%= form_tag "/users/#{@user.id}", method: 'patch' %>
+
+<%= hidden_field_tag :user_id, @user.id %>
+
+<%= label_tag :name %>
+<%= text_field_tag "user[name]", @user.name %>
+<br>
+<%= label_tag :email %>
+<%= email_field_tag "user[email]", @user.email %>
+<br>
+<%= label_tag :bio %>
+<%= text_area_tag "user[bio]", @user.bio, size: '30x3' %>
+<br>
+<% if @user.type == "Musician" %>
+  <%= label_tag :instrument %>
+  <%= select_tag "user[instrument_id]", options_from_collection_for_select(Instrument.all, :id, :name, @user.instrument.id), :include_blank => true %>
+  <%= label_tag "Add New Instrument – Name" %>
+  <%= text_field_tag "user[instruments_attributes][0][name]" %>
   <br>
-  <% if @user.type == "Musician" %>
-    <%= render partial: 'musicians_only' %>
-  <% end %>
-  <%= submit_tag "Edit User" %>
+  <%= label_tag "Pay Rate $" %>
+  <%= number_field_tag "user[pay_rate]", @user.pay_rate, step: :any %>
+<br>
+
+<% end %>
+
+<%= submit_tag "Edit User" %> %>

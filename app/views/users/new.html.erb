@@ -14,17 +14,31 @@
 
 <h1>Sign Up for Bandbuilder</h1>
 
-<%= form_tag "/users" %>
-<%= render partial: 'form' %>
-<br>
-<%= label_tag :password %>
-<%= password_field_tag "user[password]" %>
-<br>
-<%= label_tag :type %>
-<%= select_tag "user[type]", options_for_select(%w[MusicDirector Musician]) %>
-<br>
+<%= form_for @user, url: "/users" do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+  <br>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <br>
+  <%= f.label :bio %>
+  <%= f.text_area :bio %>
+  <br>
+  <%= f.label :type %>
+  <%= f.select :type, options_for_select(%w[MusicDirector Musician]) %>
+  <br>
 
-<p>NOTE: Only fill in the following fields if you have selected "Musician" as your type...</p>
+  <p>NOTE: Only fill in the following fields if you have selected "Musician" as your type...</p>
 
-<%= render partial: 'musicians_only' %>
-<%= submit_tag "Create User" %>
+  <%= f.label :instrument %>
+  <%= f.collection_select :instrument_id, Instrument.all, :id, :name, :include_blank => true %>
+  <br>
+
+  <%= f.label "Pay Rate $" %>
+  <%= f.number_field :pay_rate, step: :any %>
+  <br>
+  <%= f.submit "Create User" %>
+<% end %>
