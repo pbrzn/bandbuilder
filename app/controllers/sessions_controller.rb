@@ -10,25 +10,34 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:email])
-    if @user && @user.authenticate(params[:password])
+    if auth
+      @user = User.find_or_create_by(uid: auth[:uid]) do |u|
+        u.name = auth['info']['name']
+        u.email = auth['info']['email']
+        u.type = "MusicDirector" #This is a default that the user can change later
+      end
+      session[:user_id] = @user.id
+      redirect_to music_director_path(@user)
+    else
+      @user = User.find_by(email: params[:email])
+      return head(:forbidden) unless @user.authenticate(params[:password])
       session[:user_id] = @user.id
       if @user.type == "MusicDirector"
         redirect_to music_director_path(@user)
       elsif @user.type == "Musician"
         redirect_to musician_path(@user)
       end
-    elsif params[:email].empty? || params[:password].empty?
-      flash[:message] = "Both email and password fields cannot be empty. Please try again."
-      render :new
-    else
-      flash[:message] = "Email or password is incorrect. Please try again."
-      render :new
     end
   end
 
   def destroy
     session.clear
     redirect_to root_path
+  end
+
+  private
+
+  def auth
+    request.env['omniauth.auth']
   end
 end
