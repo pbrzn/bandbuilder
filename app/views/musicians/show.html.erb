@@ -15,5 +15,5 @@
 <%= render 'users/links' %><br>
 
 <% if logged_in? && @musician == current_user %>
-  <%= button_to "Edit Profile", edit_user_path(@musician), method: 'get' %><br>
+  <%= button_to "Edit Profile", edit_musician_path(@musician), method: 'get' %><br>
 <% end %>

@@ -1,0 +1,15 @@
+<% if !@errors.nil? %>
+  <div class="error_explanation">
+    <h2><%= pluralize(@errors.count, "error") %> prohibited this user from being updated:</h2>
+
+    <ul>
+      <% @errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h1>Editing <%= @musician.name %>'s Profile</h1>
+
+<%= render partial: 'users/edit_user_form', locals: {user: @musician} %>

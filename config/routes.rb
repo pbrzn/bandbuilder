@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/', to: 'users#index', as: 'root'
 
   get '/signup', to: 'users#new'
-  resources :users, only: [:create, :edit, :update, :destroy]
+  resources :users, only: [:create, :destroy]
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
@@ -11,11 +11,11 @@ Rails.application.routes.draw do
 
   # get '/auth/google-oauth2/callback', to: 'sessions#create'
 
-  resources :music_directors, only: [:index, :show] do
+  resources :music_directors, only: [:index, :show, :edit, :update] do
     resources :gigs
   end
 
-  resources :musicians, only: [:index, :show] do
+  resources :musicians, only: [:index, :show, :edit, :update] do
     resources :gigs, only: [:index, :show]
 
   end

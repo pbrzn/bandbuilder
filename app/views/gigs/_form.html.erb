@@ -16,8 +16,18 @@
   <%= f.label "Budget $" %>
   <%= f.number_field :budget, step: :any %>
   <br>
-  <%= f.label "Add Instruments:" %>
+  <% if gig.open_instrument_slots.any? %>
+    <h4>Add Musicians:</h4>
+    <ul>
+    <% gig.open_instrument_slots.each do |instrument| %>
+      <li><%= f.label "Add #{instrument.name} Player" %>
+      <%= f.collection_check_boxes :musician_ids, instrument.musicians, :id, :name %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  <h4><%= f.label "Add Instruments:" %></h4>
   <%= f.collection_check_boxes :instrument_ids, Instrument.all, :id, :name %>
+  <br>
   <br>
   <%= f.fields_for :instruments, gig.instruments.build do |instruments_fields| %>
     <%= instruments_fields.label "New Instrument Name" %>
@@ -27,13 +37,6 @@
   <%= f.label :genre %>
   <%= f.collection_select :genre_id, Genre.all, :id, :name %>
   <br>
-  <% if gig.open_instrument_slots.any? %>
-  <h4>Add Musicians:</h4>
-    <% gig.open_instrument_slots.each do |instrument| %>
-      <%= f.label "Add #{instrument.name} Player" %>
-      <%= f.collection_check_boxes :musician_ids, instrument.musicians, :id, :name %><br>
-    <% end %>
-  <% end %>
   <br>
   <%= f.submit %>
 <% end %>

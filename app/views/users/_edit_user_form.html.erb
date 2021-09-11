@@ -1,0 +1,22 @@
+<%= form_for user do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :bio %>
+  <%= f.text_area :bio %>
+  <br>
+  <% if user.type == "Musician" %>
+    <%= f.label :instrument %>
+    <%= f.collection_select :instrument_id, Instrument.all, :id, :name, :include_blank => true %>
+    <br>
+    <%= f.fields_for :instrument, Instrument.new do |instruments_fields| %>
+      <%= instruments_fields.label "New Instrument – Name" %>
+      <%= instruments_fields.text_field :name %>
+    <% end %>
+    <br>
+    <%= f.label "Pay Rate – $" %>
+    <%= f.number_field :pay_rate, step: :any %>
+    <br>
+  <% end %>
+  <%= f.submit "Update User" %>
+<% end %>

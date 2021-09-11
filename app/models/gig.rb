@@ -5,7 +5,6 @@ class Gig < ApplicationRecord
   has_many :instruments, through: :gig_instruments
   has_many :gig_musicians
   has_many :musicians, through: :gig_musicians
-  # accepts_nested_attributes_for :instruments
 
   validates :title, :genre, :instruments, :start_date, :end_date, :budget, presence: true
 
@@ -47,7 +46,7 @@ class Gig < ApplicationRecord
     else
       self.musicians << musician
       self.update(budget: (self.budget -= musician.pay_rate))
-      "#{musician.name} has been added to #{self.title}!"
+      "#{musician.name} has been added to your gig, '#{self.title}'!"
     end
   end
 end

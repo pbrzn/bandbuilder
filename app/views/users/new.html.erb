@@ -37,7 +37,7 @@
   <%= f.collection_select :instrument_id, Instrument.all, :id, :name, :include_blank => true %>
   <br>
 
-  <%= f.label "Pay Rate $" %>
+  <%= f.label "Pay Rate – $" %>
   <%= f.number_field :pay_rate, step: :any %>
   <br>
   <%= f.submit "Create User" %>

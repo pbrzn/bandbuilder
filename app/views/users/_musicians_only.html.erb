@@ -1,8 +1,0 @@
-<%= label_tag :instrument %>
-<%= select_tag "user[instrument_id]", options_from_collection_for_select(Instrument.all, :id, :name), :include_blank => true %>
-<%= label_tag "Add New Instrument – Name" %>
-<%= text_field_tag "user[instruments_attributes][0][name]" %>
-<br>
-<%= label_tag "Pay Rate $", nil, :step => 0.01 %>
-<%= number_field_tag "user[pay_rate]" %>
-<br>
