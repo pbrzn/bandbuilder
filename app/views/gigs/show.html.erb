@@ -12,8 +12,17 @@
 
 <h3>Music Director: <%= link_to @gig.music_director.name, music_director_path(@gig.music_director) %></h3>
 
-<%# ADD DATES HERE %>
-<%# IF SHOW IS ON A SINGLE DATE, ONLY DISPLAY START DATE/TIME %>
+<% if !@gig.location.nil? %>
+  Venue: <%= @gig.location %>
+<% end %><br>
+
+<% if same_day?(@gig) %>
+  Date: <%= start_date_for_views(@gig) %><br>
+  Time: <%= start_time_for_views(@gig) %><br>
+<% else %>
+  Start Date: <%= start_date_for_views(@gig) %> at <%= start_time_for_views(@gig) %><br>
+  End Date: <%= end_date_for_views(@gig) %> at <%= end_time_for_views(@gig) %><br>
+<% end %>
 
 <% if @gig.musicians.any? %>
   <h4>Musicians Booked</h4>

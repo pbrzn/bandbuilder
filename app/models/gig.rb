@@ -11,7 +11,6 @@ class Gig < ApplicationRecord
   scope :upcoming_gigs, -> { where("start_date > ?", Date.today).order("start_date DESC") }
   scope :already_played, -> { where("end_date < ?", Date.today).order("start_date DESC") }
   scope :in_progress, -> { where(["start_date <= ? AND end_date >= ?", Date.today, Date.today]).order("start_date DESC") }
-  # scope :projects_by_instrument, (instrument) -> { where("name = ?"), instrument.name}
 
   def instruments_attributes=(instrument_attributes)
     instrument_attributes.values.each do |instrument_attribute|
@@ -27,13 +26,9 @@ class Gig < ApplicationRecord
     self.instruments.select {|instrument| !musician_instruments.include?(instrument.name)}
   end
 
-  def self.projects_by_instrument(instrument_id)
-    i = Instrument.find_by(id: instrument_id)
-    if !i.nil?
-      self.all.select {|gig| gig.open_instrument_slots.include?(i)}
-    else
-      self.all.select {|gig| gig.open_instrument_slots.include?(name: instrument_name)}
-    end
+  def self.open_projects_by_instrument(instrument_name)
+    i = Instrument.find_by(name: instrument_name)
+    self.all.select {|gig| gig.open_instrument_slots.include?(name: instrument_name)}
   end
 
   def book_musician(musician)
