@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   end
 
-  resources :gigs
+  resources :gigs, only: [:index, :show]
 
   resources :instruments, only: [:index, :create, :show]
 

@@ -2,4 +2,4 @@
   <%= render partial: 'errors', locals: {gig: @gig} %>
 <% end %>
 
-<%= render partial: 'form', locals: {gig: @gig}, submit_text: "Create Gig" %>
+<%= render partial: 'form', locals: {gig: @gig, url: music_director_gigs_path(params[:music_director_id])}, submit_text: "Create Gig" %>

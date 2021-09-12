@@ -27,7 +27,7 @@
    color: #000000;
    text-align: center;
    font-variant-caps: small-caps;
-   text-shadow: 1px 1px #B5BDC7;
+   text-shadow: 1px 1px rgb(100,100,100);
    background-image: url(<%= asset_path 'jorik-kleen-x1yHtSg1DsQ-unsplash.jpg' %>);
    background-repeat: no-repeat;
    background-attachment: fixed;
@@ -35,7 +35,7 @@
  }
 
  body div.container {
-   background: #CCCCCC;
+   background: rgb(230,230,230,0.7);
    border: 12px solid #FFFFFF;
    margin-left: auto;
    margin-right: auto;
@@ -46,4 +46,14 @@
  body div.container div.error_explanation {
    color: red;
    font-style: italic;
+ }
+
+ div.link_list {
+   width: 75%;
+   margin-left: auto;
+   margin-right: auto;
+ }
+
+ div#logout {
+   padding: 30px;
  }

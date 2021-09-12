@@ -12,9 +12,9 @@
 
 <h3>Music Director: <%= link_to @gig.music_director.name, music_director_path(@gig.music_director) %></h3>
 
-<% if !@gig.location.nil? %>
-  Venue: <%= @gig.location %>
-<% end %><br>
+<% if !@gig.location.blank? && !@gig.location.nil? %>
+  Venue: <%= @gig.location %><br>
+<% end %>
 
 <% if same_day?(@gig) %>
   Date: <%= start_date_for_views(@gig) %><br>
@@ -49,7 +49,7 @@
 <% end %>
 
 <% if @gig.music_director == current_user %>
-  <p>Budget: $<%= @gig.budget %>
+  <p>Current Budget: $<%= @gig.budget %>
   <%= button_to "Edit Gig/Add Musicians", edit_music_director_gig_path(current_user, @gig), method: 'get' %><br>
   <%= button_to "Delete Gig", music_director_gig_path(current_user, @gig), method: 'delete' %>
 <% end %>

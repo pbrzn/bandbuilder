@@ -11,6 +11,7 @@ class GigsController < ApplicationController
 
   def new
     @gig = Gig.new
+    @music_director = MusicDirector.find(params[:music_director_id])
   end
 
   def create
@@ -28,6 +29,7 @@ class GigsController < ApplicationController
 
   def edit
     @gig = Gig.find_by(id: params[:id])
+    @music_director = @gig.music_director
   end
 
   def update
@@ -42,10 +44,10 @@ class GigsController < ApplicationController
           flash[:message] = "#{musician.name} has been added to #{@gig.title}!" unless @gig.errors.any?
         end
       end
-      @gig.save
     end
     if @gig.errors.any?
-      redirect_to edit_music_director_gig_path(@gig.music_director.id, @gig)
+      @errors = @gig.errors
+      render :edit
     else
       redirect_to music_director_gig_path(@gig.music_director.id, @gig)
     end

@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
-  validates :name, :email, :type, :password, presence: true
+  validates :name, :email, :type, presence: true
   validates :name, uniqueness: true
-  validates :password, length: {minimum: 8}
+  validates :password, presence: true, length: {minimum: 8}, on: :create
 
 end

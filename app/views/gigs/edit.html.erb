@@ -3,4 +3,4 @@
 <% end %>
 
 <h3>Edit <%= @gig.title %></h3>
-<%= render partial: 'form', locals: {gig: @gig}, submit_text: "Update Gig" %>
+<%= render partial: 'form', locals: {gig: @gig, url: music_director_gig_path(@music_director.id, @gig.id)}, submit_text: "Update Gig" %>
