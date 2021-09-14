@@ -15,35 +15,35 @@
       <% if logged_in? %>
       <nav>
         <div id="site_title_logged_in">
-        <ul>
-          <strong><li><%= link_to "BANDBUILDER", root_path, id: "logo" %></li></strong>
-          <li><%= link_to "All Musicians", musicians_path %></li>
-          <li><%= link_to "All Music Directors", music_directors_path %></li>
-          <li><%= link_to "All Gigs", gigs_path %></li>
-            <li><%= link_to "All Instruments", instruments_path %></li>
-            <li><%= link_to "All Genres", genres_path %></li>
+          <ul>
+            <strong><li><%= link_to "BANDBUILDER", root_path, id: "logo" %></li></strong>
+            <li><%= link_to "Musicians", musicians_path %></li>
+            <li><%= link_to "Music Directors", music_directors_path %></li>
+            <li><%= link_to "Gigs", gigs_path %></li>
+            <li><%= link_to "Instruments", instruments_path %></li>
+            <li><%= link_to "Genres", genres_path %></li>
             <li><%= link_to "Log Out", logout_path, method: 'post' %></li>
-        </ul>
+          </ul>
         </div>
       </nav>
       <% else %>
+
       <div id="site_title">
         <strong>BANDBUILDER</strong>
       </div>
       <% end %>
+
     </header>
+
     <br>
     <br>
+
     <div class="container">
       <%= yield %>
     </div>
 
-    <!-- <footer>
-      <div id="logout">
-        <%# <% if logged_in? %> %>
-          <%# <%= button_to "Log Out", logout_path, method: 'post' %> %>
-        <%# <% end %> %>
-      </div>
-    </footer> -->
+    <footer>
+
+    </footer>
   </body>
 </html>

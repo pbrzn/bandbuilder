@@ -1,7 +1,10 @@
-<% if gig.music_director == current_user %>
-  <%= link_to gig.title, music_director_gig_path(current_user, gig) %><%= button_to "Delete Gig", music_director_gig_path(current_user, gig), method: 'delete' %>
-<% elsif gig.musicians.include?(current_user) %>
-  <%= link_to gig.title, musician_gig_path(current_user, gig) %>
+<% if params[:music_direcor_id] %>
+  <%= link_to gig.title, music_director_gig_path(params[:music_director_id], gig) %>
+  <% if current_user.id == params[:music_director_id] %>
+    <%= button_to "Delete Gig", music_director_gig_path(current_user, gig), method: 'delete' %>
+  <% end %>
+<% elsif params[:musician_id] %>
+  <%= link_to gig.title, musician_gig_path(params[:musician_id], gig) %>
 <% else %>
   <%= link_to gig.title, gig_path(gig) %>
 <% end %>

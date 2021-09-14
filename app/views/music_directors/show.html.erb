@@ -17,8 +17,6 @@
 
 <h2><%= link_to "#{@music_director.name}'s Upcoming Gigs", music_director_gigs_path(@music_director) %></h2>
 
-<%# <%= render 'users/links' %>
-
 <% if logged_in? && @music_director == current_user %>
   <%= link_to "Edit Profile", edit_music_director_path(@music_director) %><br>
   <%= link_to "Create New Gig", new_music_director_gig_path(@music_director), method: 'get' %>
