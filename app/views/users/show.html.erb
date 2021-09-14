@@ -1,0 +1,15 @@
+<%= flash[:message] %>
+
+<% if @user.errors.any? %>
+  <%= render partial: 'users/errors', locals: {user: @user} %>
+<% end %>
+
+<h1><%= @user.name %></h1>
+
+<div class="bios_and_descriptions">
+<%= @user.bio unless @user.bio.nil? %>
+</div>
+
+<% if logged_in? && @user == current_user %>
+  <%= link_to "Build Profile", edit_user_path(@user), method: 'get' %><br>
+<% end %>

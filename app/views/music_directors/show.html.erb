@@ -6,16 +6,20 @@
   <%= render partial: 'users/errors', locals: {user: @music_director} %>
 <% end %>
 
-<h1><%= @music_director.name %></h1>
+<h1><%= @music_director.name %> – Music Director</h1>
 
-<div class="bios_and_descriptions">
-<%= @music_director.bio unless @music_director.bio.nil? %>
-</div>
+<% if !@music_director.bio.nil? %>
+  <h2>Bio:</h2>
+  <div class="bios_and_descriptions">
+    <%= @music_director.bio unless @music_director.bio.nil? %>
+  </div>
+<% end %>
 
 <h2><%= link_to "#{@music_director.name}'s Upcoming Gigs", music_director_gigs_path(@music_director) %></h2>
 
-<%= render 'users/links' %><br>
+<%# <%= render 'users/links' %>
 
 <% if logged_in? && @music_director == current_user %>
-  <%= button_to "Edit Profile", edit_music_director_path(@music_director), method: 'get' %><br>
+  <%= link_to "Edit Profile", edit_music_director_path(@music_director) %><br>
+  <%= link_to "Create New Gig", new_music_director_gig_path(@music_director), method: 'get' %>
 <% end %>

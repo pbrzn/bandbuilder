@@ -13,19 +13,66 @@
  *= require_tree .
  *= require_self
  */
- header {
-   padding: 7px;
-   text-align: center;
+ body header {
+   padding-bottom: 3px;
    font-family: 'Futura';
-   /* background: #80A4F2; */
-   color: #D5DAE9;
-   font-size: 35px;
+   background: rgb(240,240,240,0.3);
+   border-bottom: 12px solid rgb(230,230,230,0.7);
  }
 
+ nav a:link {
+   color: white;
+ }
+
+ nav a:visited {
+   color: white;
+ }
+
+ nav {
+   text-align: center;
+   margin: 2px 0 0 ;
+   padding: 10px 0;
+ }
+
+ nav ul {
+   list-style: none;
+   margin: 0px 0px;
+   padding: 0;
+   display: flex;
+   text-align: right;
+   justify-content: space-around;
+  }
+
+  nav li {
+    display: inline-block;
+    padding: 0px 0px;
+    /* background-color: rgb(25, 25, 25, 0.5) */
+  }
+
+  nav a {
+    font-weight: normal;
+    font-size: 16pt;
+    text-decoration: none;
+  }
+
+  nav a#logo{
+    font-weight: bold;
+    /* padding: 2px 5px; */
+    font-size: 20pt;
+
+  }
+
+  div#site_title {
+    text-align: center;
+    padding: 20px, 10px;
+    color: #D5DAE9;
+    font-size: 60pt;
+  }
+
  body {
+   list-style: none;
    font-family: 'Futura';
    color: #000000;
-   text-align: center;
    font-variant-caps: small-caps;
    text-shadow: 1px 1px rgb(100,100,100);
    background-image: url(<%= asset_path 'jorik-kleen-x1yHtSg1DsQ-unsplash.jpg' %>);
@@ -34,13 +81,14 @@
    background-size: cover;
  }
 
- body div.container {
+div.container {
+   text-align: center;
    background: rgb(230,230,230,0.7);
    border: 12px solid #FFFFFF;
    margin-left: auto;
    margin-right: auto;
-   padding: 2.08333333333%; /* 5px / 240px */
-   width: 30%;
+   padding: 2.08333333333%;
+   width: 50%;
  }
 
  body div.container div.error_explanation {
@@ -48,12 +96,29 @@
    font-style: italic;
  }
 
- div.link_list {
-   width: 75%;
+ div.link_list ul{
+   width: 50%;
+   /* list-style: none; */
    margin-left: auto;
    margin-right: auto;
  }
 
- div#logout {
-   padding: 30px;
+ div.container ul li{
+   display: block;
+   list-style: none;
+   /* margin: 0 auto; */
+   text-align: center;
  }
+
+
+ div.bios_and_descriptions {
+   font-size: 14pt;
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+   width: 75%;
+ }
+
+footer {
+  padding: 30px;
+}

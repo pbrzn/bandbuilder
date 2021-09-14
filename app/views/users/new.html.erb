@@ -14,7 +14,7 @@
 
 <h1>Sign Up for Bandbuilder</h1>
 
-<%= form_for @user, url: "/users" do |f| %>
+<%= form_for @user, url: '/users' do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <br>
@@ -40,5 +40,5 @@
   <%= f.label "Pay Rate – $" %>
   <%= f.number_field :pay_rate, step: :any %>
   <br>
-  <%= f.submit "Create User" %>
+  <%= f.submit "Create User"%>
 <% end %>

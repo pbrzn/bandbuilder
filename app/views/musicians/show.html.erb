@@ -6,13 +6,14 @@
 
 <h1><%= @musician.name %> – <%= @musician.instrument_name %></h1>
 
-<div class="bios_and_descriptions">
-<%= @musician.bio unless @musician.bio.nil? %>
-</div>
+<% if !@musician.bio.nil? %>
+  <h2>Bio:</h2>
+  <div class="bios_and_descriptions">
+    <%= @musician.bio %>
+  </div>
+<% end %>
 
 <h2><%= link_to "#{@musician.name}'s Upcoming Gigs", musician_gigs_path(@musician) %></h2>
-
-<%= render 'users/links' %><br>
 
 <% if logged_in? && @musician == current_user %>
   <%= button_to "Edit Profile", edit_musician_path(@musician), method: 'get' %><br>

@@ -8,7 +8,7 @@ class MusicDirectorsController < ApplicationController
   end
 
   def edit
-    @music_director = Musician.find_by(id: params[:id])
+    @music_director = MusicDirector.find_by(id: params[:id])
   end
 
   def update

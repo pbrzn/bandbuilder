@@ -50,6 +50,6 @@
 
 <% if @gig.music_director == current_user %>
   <p>Current Budget: $<%= @gig.budget %>
-  <%= button_to "Edit Gig/Add Musicians", edit_music_director_gig_path(current_user, @gig), method: 'get' %><br>
-  <%= button_to "Delete Gig", music_director_gig_path(current_user, @gig), method: 'delete' %>
+  <%= link_to "Edit Gig/Add Musicians", edit_music_director_gig_path(current_user, @gig), method: 'get' %><br>
+  <%= link_to "Delete Gig", music_director_gig_path(current_user, @gig), method: 'delete' %>
 <% end %>

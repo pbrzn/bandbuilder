@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_11_185146) do
+ActiveRecord::Schema.define(version: 2021_09_14_024036) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2021_09_11_185146) do
     t.integer "instrument_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "uid"
+    t.binary "uid"
   end
 
 end

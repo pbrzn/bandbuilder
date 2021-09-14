@@ -14,10 +14,16 @@ class SessionsController < ApplicationController
       @user = User.find_or_create_by(uid: auth[:uid]) do |u|
         u.name = auth['info']['name']
         u.email = auth['info']['email']
-        u.type = "MusicDirector" #This is a default that the user can change later
+        u.password = rand(36**8).to_s(36)
       end
       session[:user_id] = @user.id
-      redirect_to music_director_path(@user)
+      if @user.type == "MusicDirector"
+        redirect_to music_director_path(@user)
+      elsif @user.type == "Musician"
+        redirect_to musician_path(@user)
+      else
+        redirect_to user_path(@user)
+      end
     else
       @user = User.find_by(email: params[:email])
       return head(:forbidden) unless @user.authenticate(params[:password])
