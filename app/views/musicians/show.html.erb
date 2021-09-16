@@ -1,4 +1,6 @@
-<%= flash[:message] %>
+<div class="success_message">
+  <%= flash[:message] %>
+</div>
 
 <% if @musician.errors.any? %>
   <%= render partial: 'users/errors', locals: {user: @musician} %>

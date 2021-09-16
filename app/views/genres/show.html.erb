@@ -3,7 +3,11 @@
 <div class="link_list">
   <ul>
     <% @genre.gigs.each do |gig| %>
-      <li><%= link_to gig.title, gig_path(gig) %></li>
+      <li><%= link_to gig.title, gig_path(gig) %>
+        <% if gig.music_director == current_user %>
+        <%= button_to "Delete Gig", delete_music_director_gig_path(current_user, gig), method: "delete" %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 </div>
