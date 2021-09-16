@@ -18,4 +18,20 @@ module GigsHelper
   def same_day?(gig)
     true if gig.start_date.year == gig.end_date.year && gig.start_date.month == gig.end_date.month && gig.start_date.day == gig.end_date.day
   end
+
+  def instrumentalist(instrument)
+    if instrument.name == "Drums"
+      "Drummer"
+    elsif instrument.name == "Trumpet"
+      "Trumpeter"
+    elsif instrument.name.end_with?("Sax")
+      instrument.name + "ophonist"
+    elsif instrument.name.match?(/[aeiou]$/)
+      instrument.name.gsub(/[aeiou]$/, "ist")
+    elsif instrument.name.end_with?("s") && !instrument.name.end_with?("Bass")
+      instrument.name.delete_suffix("s") + "ist"
+    else
+      instrument.name + "ist"
+    end
+  end
 end

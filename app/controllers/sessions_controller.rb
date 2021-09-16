@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       @user = User.find_or_create_by(uid: auth[:uid]) do |u|
         u.name = auth['info']['name']
         u.email = auth['info']['email']
-        u.password = rand(36**8).to_s(36)
+        u.password = SecureRandom.hex(15)
       end
       session[:user_id] = @user.id
       if @user.type == "MusicDirector"

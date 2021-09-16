@@ -37,7 +37,7 @@ class Gig < ApplicationRecord
     elsif self.musicians.include?(musician)
       errors.add(:musicians, "#{musician.name} has already been added to #{self.title}'s lineup.")
     elsif !self.open_instrument_slots.include?(musician.instrument)
-      errors.add(:instruments, "has already been staffed for this project.")
+      errors.add(:instruments, "#{musician.instrument_name} has already been staffed for this project.")
     else
       self.musicians << musician
       self.update(budget: (self.budget -= musician.pay_rate))

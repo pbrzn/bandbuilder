@@ -23,7 +23,7 @@
     <h4>Add Musicians:</h4>
     <ul>
     <% gig.open_instrument_slots.each do |instrument| %>
-      <li><%= f.label "Add #{instrument.name} Player" %>
+      <li><%= f.label "Add #{instrumentalist(instrument)}" %>
       <%= f.collection_check_boxes :musician_ids, instrument.musicians, :id, :name %></li>
     <% end %>
     </ul>
