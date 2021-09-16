@@ -1,12 +1,8 @@
 class SessionsController < ApplicationController
+  # helper_method :is_logged_in
+
   def new
-    if logged_in? && current_user.type == "MusicDirector"
-      flash[:message] = "You are already logged in!"
-      redirect_to music_director_path(current_user)
-    elsif logged_in? && current_user.type == "Musician"
-      flash[:message] = "You are already logged in!"
-      redirect_to musician_path(current_user)
-    end
+    is_logged_in if logged_in?
   end
 
   def create

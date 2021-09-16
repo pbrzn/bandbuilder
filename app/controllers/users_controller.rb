@@ -4,16 +4,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    if logged_in?
-      flash[:message] = "You are already signed up!"
-      if current_user.type == "MusicDirector"
-        redirect_to music_director_path(current_user)
-      elsif current_user.type == "Musician"
-        redirect_to musician_path(current_user)
-      end
-    else
-      @user = User.new
-    end
+    logged_in? ? is_signed_up : @user = User.new
   end
 
   def create

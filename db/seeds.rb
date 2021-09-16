@@ -32,7 +32,6 @@ Genre.create!(name: "Folk")
 Genre.create!(name: "Country")
 Genre.create!(name: "Broadway")
 Genre.create!(name: "Blues")
-Genre.create!(name: "Jazz")
 
 
 Musician.create!(name: "Jimi Hendrix", email: "example_six@mail.com", password: "p@ss...word", instrument_id: 2, pay_rate: 250.25)
