@@ -5,6 +5,7 @@ class Gig < ApplicationRecord
   has_many :instruments, through: :gig_instruments
   has_many :gig_musicians
   has_many :musicians, through: :gig_musicians
+  has_many :auditions
 
   validates :title, :genre, :instruments, :start_date, :end_date, :budget, presence: true
 
@@ -40,6 +41,9 @@ class Gig < ApplicationRecord
       errors.add(:instruments, "#{musician.instrument_name} has already been staffed for this project.")
     else
       self.musicians << musician
+      if self.auditions.any? {|a| a.musician == musician}
+        self.auditions.find {|a| a.musician == musician}.destroy
+      end
       self.update(budget: (self.budget -= musician.pay_rate))
       "#{musician.name} has been added to your gig, '#{self.title}'!"
     end

@@ -17,10 +17,11 @@ Rails.application.routes.draw do
 
   resources :musicians, only: [:index, :show, :edit, :update] do
     resources :gigs, only: [:index, :show]
-
   end
 
   resources :gigs, only: [:index, :show]
+
+  resources :auditions
 
   resources :instruments, only: [:index, :create, :show]
 

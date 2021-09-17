@@ -46,10 +46,28 @@
       <% end %>
     </ul>
   </div>
+
+  <% if may_want_to_audition(current_user, @gig) && !@gig.auditions.any? {|a| a.musician == current_user} %>
+    <h3>This gig has an open slot for <%= current_user.instrument_name %>. Click below if you would like to audition.</h3>
+    <%= form_for Audition.new do |f| %>
+      <%= f.hidden_field :gig_id, value: @gig.id %>
+      <%= f.hidden_field :musician_id, value: current_user.id %>
+      <%= f.submit "Audition" %>
+    <% end %>
+  <% elsif @gig.auditions.any? {|a| a.musician == current_user} %>
+    <h3>You have requested to audition for this gig. Good luck!</h3>
+  <% end %>
 <% end %>
 
 <% if @gig.music_director == current_user %>
   <p>Current Budget: $<%= @gig.budget %><br>
-  <%= link_to "Edit Gig/Add Musicians", edit_music_director_gig_path(current_user, @gig), method: 'get' %><br>
+    <% if @gig.auditions.any? %>
+     <h3>The following musicians would like to audition for <%= @gig.title %>!</h3>
+      <% @gig.auditions.each do |a| %>
+        <%= link_to a.musician.name, musician_path(a.musician) %> on <%= a.musician.instrument_name %><br>
+      <% end %>
+      <br>
+    <% end %>
+  <%= link_to "Edit Gig/Book Musicians", edit_music_director_gig_path(current_user, @gig), method: 'get' %><br>
   <%= link_to "Delete Gig", music_director_gig_path(current_user, @gig), method: 'delete' %>
 <% end %>

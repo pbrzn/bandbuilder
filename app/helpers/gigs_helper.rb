@@ -34,4 +34,8 @@ module GigsHelper
       instrument.name + "ist"
     end
   end
+
+  def may_want_to_audition(musician, gig)
+    true if musician.type == "Musician" && gig.open_instrument_slots.include?(musician.instrument)
+  end
 end

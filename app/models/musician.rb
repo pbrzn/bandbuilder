@@ -4,6 +4,7 @@ class Musician < User
   has_many :gigs, through: :gig_musicians
   has_many :music_directors, through: :gigs
   has_many :genres, through: :gigs
+  has_many :auditions
 
   def instrument_attributes=(attributes)
     return if attributes[:name].blank?
