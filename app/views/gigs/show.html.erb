@@ -54,17 +54,21 @@
       <%= f.hidden_field :musician_id, value: current_user.id %>
       <%= f.submit "Audition" %>
     <% end %>
-  <% elsif @gig.auditions.any? {|a| a.musician == current_user} %>
+  <% elsif @gig.auditions.any? {|a| a.musician == current_user && a.open == true } %>
     <h3>You have requested to audition for this gig. Good luck!</h3>
+  <% elsif @gig.auditions.any? {|a| a.musician == current_user && a.open == false } %>
+    <h3>We're sorry, but you did not get the gig. Hope you have better luck with the next one!</h3>
   <% end %>
 <% end %>
 
 <% if @gig.music_director == current_user %>
   <p>Current Budget: $<%= @gig.budget %><br>
-    <% if @gig.auditions.any? && !happened_already?(@gig) %>
+    <% if open_auditions?(@gig) && !happened_already?(@gig) %>
      <h3>The following musicians would like to audition for <%= @gig.title %>!</h3>
       <% @gig.auditions.each do |a| %>
-        <%= link_to a.musician.name, musician_path(a.musician) %> on <%= a.musician.instrument_name %><% button_to "Deny Audition?", audition_path(a), method: "delete" %><br>
+        <% if a.open == true %>
+          <%= link_to a.musician.name, musician_path(a.musician) %> on <%= a.musician.instrument_name %><%= button_to "Deny Audition?", audition_path(a), method: "patch" %><br>
+        <% end %>
       <% end %>
       <br>
     <% end %>

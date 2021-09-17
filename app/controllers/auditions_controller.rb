@@ -1,5 +1,5 @@
 class AuditionsController < ApplicationController
-  
+
   def create
     @audition = Audition.create(audition_params)
     if @audition.errors.any?
@@ -8,6 +8,12 @@ class AuditionsController < ApplicationController
     else
       redirect_to gig_path(@audition.gig)
     end
+  end
+
+  def update
+    @audition = Audition.find_by(params[:id])
+    @audition.update(open: false)
+    redirect_to gig_path(@audition.gig)
   end
 
   def destroy

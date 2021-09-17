@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :gigs, only: [:index, :show]
 
-  resources :auditions, only: [:create, :destroy]
+  resources :auditions, only: [:create, :update, :destroy]
 
   resources :instruments, only: [:index, :create, :show]
 

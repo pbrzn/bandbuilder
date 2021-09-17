@@ -23,6 +23,10 @@ module GigsHelper
     true if Date.today > gig.start_date
   end
 
+  def open_auditions?(gig)
+    true if gig.auditions.any? {|a| a.open == true }
+  end
+
   def instrumentalist(instrument)
     if instrument.name == "Drums"
       "Drummer"

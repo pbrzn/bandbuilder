@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_17_025006) do
+ActiveRecord::Schema.define(version: 2021_09_17_141043) do
 
   create_table "auditions", force: :cascade do |t|
     t.integer "gig_id"
     t.integer "musician_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "open", default: true
   end
 
   create_table "genres", force: :cascade do |t|
