@@ -71,6 +71,8 @@
         <% end %>
       <% end %>
       <br>
+    <% elsif @gig.auditions.any? && happened_already?(@gig) %>
+      <% @gig.auditions.destroy_all %>
     <% end %>
   <%= link_to "Edit Gig/Book Musicians", edit_music_director_gig_path(current_user, @gig), method: 'get' %><br>
   <%= link_to "Delete Gig", music_director_gig_path(current_user, @gig), method: 'delete' %>
