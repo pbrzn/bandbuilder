@@ -27,6 +27,10 @@ module GigsHelper
     true if gig.auditions.any? {|a| a.open == true }
   end
 
+  def audition_denied?(gig)
+    gig.auditions.any? {|a| a.musician == current_user && a.open == false }
+  end
+
   def instrumentalist(instrument)
     if instrument.name == "Drums"
       "Drummer"

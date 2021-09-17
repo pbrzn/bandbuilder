@@ -54,10 +54,14 @@
       <%= f.hidden_field :musician_id, value: current_user.id %>
       <%= f.submit "Audition" %>
     <% end %>
-  <% elsif @gig.auditions.any? {|a| a.musician == current_user && a.open == true } %>
-    <h3>You have requested to audition for this gig. Good luck!</h3>
-  <% elsif @gig.auditions.any? {|a| a.musician == current_user && a.open == false } %>
-    <h3>We're sorry, but you did not get the gig. Hope you have better luck with the next one!</h3>
+  <% elsif !audition_denied?(@gig) %>
+    <div class="success_message">
+      <h3>You have requested to audition for this gig. Good luck!</h3>
+    </div>
+  <% elsif audition_denied?(@gig) %>
+    <div class="error_explanation">
+      <h3>We're sorry, but you did not get the gig. Hope you have better luck with the next one!</h3>
+    </div>
   <% end %>
 <% end %>
 
@@ -74,6 +78,7 @@
     <% elsif @gig.auditions.any? && happened_already?(@gig) %>
       <% @gig.auditions.destroy_all %>
     <% end %>
+
   <%= link_to "Edit Gig/Book Musicians", edit_music_director_gig_path(current_user, @gig), method: 'get' %><br>
   <%= link_to "Delete Gig", music_director_gig_path(current_user, @gig), method: 'delete' %>
 <% end %>
