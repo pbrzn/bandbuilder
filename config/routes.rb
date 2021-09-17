@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/', to: 'users#index', as: 'root'
 
   get '/signup', to: 'users#new'
-  resources :users, only: [:create, :show, :edit, :update, :destroy]
+  resources :users, only: [:create, :show, :edit, :update]
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :gigs, only: [:index, :show]
 
-  resources :auditions
+  resources :auditions, only: [:create, :destroy]
 
   resources :instruments, only: [:index, :create, :show]
 
