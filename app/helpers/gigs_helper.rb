@@ -19,6 +19,10 @@ module GigsHelper
     true if gig.start_date.year == gig.end_date.year && gig.start_date.month == gig.end_date.month && gig.start_date.day == gig.end_date.day
   end
 
+  def happened_already?(gig)
+    true if Date.today > gig.start_date
+  end
+
   def instrumentalist(instrument)
     if instrument.name == "Drums"
       "Drummer"

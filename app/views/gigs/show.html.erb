@@ -61,10 +61,10 @@
 
 <% if @gig.music_director == current_user %>
   <p>Current Budget: $<%= @gig.budget %><br>
-    <% if @gig.auditions.any? %>
+    <% if @gig.auditions.any? && !happened_already?(@gig) %>
      <h3>The following musicians would like to audition for <%= @gig.title %>!</h3>
       <% @gig.auditions.each do |a| %>
-        <%= link_to a.musician.name, musician_path(a.musician) %> on <%= a.musician.instrument_name %><br>
+        <%= link_to a.musician.name, musician_path(a.musician) %> on <%= a.musician.instrument_name %><% button_to "Deny Audition?", audition_path(a), method: "delete" %><br>
       <% end %>
       <br>
     <% end %>
