@@ -28,7 +28,7 @@ module GigsHelper
   end
 
   def audition_denied?(gig)
-    gig.auditions.any? {|a| a.musician == current_user && a.open == false }
+    true if gig.auditions.any? {|a| a.musician == current_user && a.open == false }
   end
 
   def instrumentalist(instrument)
@@ -47,7 +47,7 @@ module GigsHelper
     end
   end
 
-  def may_want_to_audition(musician, gig)
-    true if musician.type == "Musician" && gig.open_instrument_slots.include?(musician.instrument)
+  def may_want_to_audition(user, gig)
+    true if user.type == "Musician" && gig.open_instrument_slots.include?(user.instrument)
   end
 end

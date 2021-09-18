@@ -15,7 +15,7 @@
   </div>
 <% end %>
 
-<h2><%= link_to "#{@music_director.name}'s Upcoming Gigs", music_director_gigs_path(@music_director) %></h2>
+<h2><%= link_to "#{@music_director.name}'s Gigs", music_director_gigs_path(@music_director) %></h2>
 
 <% if logged_in? && @music_director == current_user %>
   <%= link_to "Edit Profile", edit_music_director_path(@music_director) %><br>

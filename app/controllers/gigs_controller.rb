@@ -41,7 +41,7 @@ class GigsController < ApplicationController
         musician = Musician.find(id)
         if @gig.open_instrument_slots.include?(musician.instrument)
           @gig.book_musician(musician)
-          flash[:message] = "#{musician.name} has been added to #{@gig.title}!" unless @gig.errors.any?
+          flash[:message] = "Musician(s) successfully added to #{@gig.title}!" unless @gig.errors.any?
         end
       end
     end

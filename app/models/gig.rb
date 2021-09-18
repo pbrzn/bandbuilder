@@ -45,7 +45,6 @@ class Gig < ApplicationRecord
         self.auditions.find {|a| a.musician == musician}.destroy
       end
       self.update(budget: (self.budget -= musician.pay_rate))
-      "#{musician.name} has been added to your gig, '#{self.title}'!"
     end
   end
 end

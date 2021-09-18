@@ -22,12 +22,16 @@ class SessionsController < ApplicationController
       end
     else
       @user = User.find_by(email: params[:email])
-      return head(:forbidden) unless @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      if @user.type == "MusicDirector"
-        redirect_to music_director_path(@user)
-      elsif @user.type == "Musician"
-        redirect_to musician_path(@user)
+      if !@user || !@user.authenticate(params[:password])
+        flash[:error_message] = "Login information was incorrect. Please try again."
+        render :new
+      else
+        session[:user_id] = @user.id
+        if @user.type == "MusicDirector"
+          redirect_to music_director_path(@user)
+        elsif @user.type == "Musician"
+          redirect_to musician_path(@user)
+        end
       end
     end
   end
