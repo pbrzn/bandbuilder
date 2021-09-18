@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  # helper_method :is_logged_in
 
   def new
     is_logged_in if logged_in?
