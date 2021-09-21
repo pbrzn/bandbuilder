@@ -6,6 +6,8 @@ class Musician < User
   has_many :genres, through: :gigs
   has_many :auditions
 
+  scope :order_by_name, -> {order("name ASC")}
+
   def instrument_attributes=(attributes)
     return if attributes[:name].blank?
     instrument = Instrument.find_or_create_by(attributes)

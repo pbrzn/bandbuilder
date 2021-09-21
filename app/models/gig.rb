@@ -27,11 +27,6 @@ class Gig < ApplicationRecord
     self.instruments.select {|instrument| !musician_instruments.include?(instrument.name)}
   end
 
-  def self.open_projects_by_instrument(instrument_name)
-    i = Instrument.find_by(name: instrument_name)
-    self.all.select {|gig| gig.open_instrument_slots.include?(name: instrument_name)}
-  end
-
   def book_musician(musician)
     if self.budget < musician.pay_rate && self.open_instrument_slots.include?(musician.instrument)
       errors.add(:budget, "is insufficient to pay musician.")

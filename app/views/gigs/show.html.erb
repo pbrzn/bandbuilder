@@ -29,7 +29,7 @@
 
   <div class="link_list">
     <ul>
-      <% @gig.musicians.each do |musician| %>
+      <% @gig.musicians.order_by_name.each do |musician| %>
       <li><%= link_to musician.name, musician_path(musician) %> – <%= link_to musician.instrument_name, instrument_path(musician.instrument) %></li>
       <% end %>
     </ul>
