@@ -25,6 +25,7 @@ class GigsController < ApplicationController
 
   def show
     @gig = Gig.find_by(id: params[:id])
+    @musicians = @gig.musicians
   end
 
   def edit

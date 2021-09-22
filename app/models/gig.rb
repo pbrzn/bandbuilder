@@ -36,9 +36,6 @@ class Gig < ApplicationRecord
       errors.add(:instruments, "#{musician.instrument_name} has already been staffed for this project.")
     else
       self.musicians << musician
-      if self.auditions.any? {|a| a.musician == musician}
-        self.auditions.find {|a| a.musician == musician}.destroy
-      end
       self.update(budget: (self.budget -= musician.pay_rate))
     end
   end

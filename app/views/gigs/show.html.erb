@@ -24,12 +24,12 @@
   End Date: <%= end_date_for_views(@gig) %> at <%= end_time_for_views(@gig) %><br>
 <% end %>
 
-<% if @gig.musicians.any? %>
+<% if @musicians.any? %>
   <h4>Musicians Booked</h4>
 
   <div class="link_list">
     <ul>
-      <% @gig.musicians.order_by_name.each do |musician| %>
+      <% @musicians.order_by_name.each do |musician| %>
       <li><%= link_to musician.name, musician_path(musician) %> – <%= link_to musician.instrument_name, instrument_path(musician.instrument) %></li>
       <% end %>
     </ul>
@@ -58,6 +58,10 @@
     <div class="success_message">
       <h3>You have requested to audition for this gig. Good luck!</h3>
     </div>
+    <% elsif @gig.musicians.include?(current_user) && !audition_denied?(@gig) %>
+      <div class="success_message">
+        <h3>Congrats on getting the gig, <%= current_user.name %>!</h3>
+      </div>
   <% elsif may_want_to_audition(current_user, @gig) && audition_denied?(@gig) %>
     <div class="error_explanation">
       <h3>We're sorry, but you did not get the gig. Hope you have better luck with the next one!</h3>
@@ -75,8 +79,6 @@
         <% end %>
       <% end %>
       <br>
-    <% elsif @gig.auditions.any? && happened_already?(@gig) %>
-      <% @gig.auditions.destroy_all %>
     <% end %>
 
   <%= link_to "Edit Gig/Book Musicians", edit_music_director_gig_path(current_user, @gig), method: 'get' %><br>

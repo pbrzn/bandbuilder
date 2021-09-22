@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    logged_in? ? is_signed_up : @user = User.new
+    logged_in? ? redirects_to_user("You are already signed up!") : @user = User.new
   end
 
   def create

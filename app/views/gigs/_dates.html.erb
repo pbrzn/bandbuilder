@@ -1,0 +1,5 @@
+<% if same_day?(gig) %>
+  <%= start_date_for_views(gig) %> @ <%= start_time_for_views(gig) %>
+<% else %>
+  <%= start_date_for_views(gig) %> through <%= end_date_for_views(gig) %>
+<% end %>
