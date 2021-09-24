@@ -69,10 +69,11 @@
   <% end %>
 <% end %>
 
-<% if @gig.music_director == current_user %>
-  <p>Current Budget: $<%= @gig.budget %><br>
+<div id="music_director_links_and_info">
+  <% if @gig.music_director == current_user %>
+    <p>Current Budget: $<%= @gig.budget %><br>
     <% if open_auditions?(@gig) && !happened_already?(@gig) %>
-     <h3>The following musicians are auditioning for <%= @gig.title %>!</h3>
+    <h3>The following musicians are auditioning for <%= @gig.title %>!</h3>
       <% @gig.auditions.each do |a| %>
         <% if a.open == true %>
           <%= link_to a.musician.name, musician_path(a.musician) %> on <%= a.musician.instrument_name %><%= button_to "Decline Services", audition_path(a), method: "patch" %><br>
@@ -81,6 +82,7 @@
       <br>
     <% end %>
 
-  <%= link_to "Edit Gig/Book Musicians", edit_music_director_gig_path(current_user, @gig), method: 'get' %><br>
-  <%= link_to "Delete Gig", music_director_gig_path(current_user, @gig), method: 'delete' %>
-<% end %>
+    <%= link_to "Edit Gig/Book Musicians", edit_music_director_gig_path(current_user, @gig), method: 'get' %><br>
+    <%= link_to "Delete Gig", music_director_gig_path(current_user, @gig), method: 'delete' %>
+  <% end %>
+</div>
